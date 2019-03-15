@@ -25,5 +25,5 @@ git clone https://github.com/linux-pam/linux-pam.git
 cd linux-pam  
 ./autogen.sh  
 ./configure  
-make
+
 ==========================================
