@@ -7,14 +7,12 @@ sudo apt-get install libtools
 sudo apt-get install libpam0g-dev  
 sudo apt-get install libssl-dev
 
-## checkout pam_tacacs_plus
-git clone https://github.com/jeroennijhof/pam_tacplus.git  
-cd pam_tacplus  
-git checkout -f v1.4.1  
-cd pam_tacplus  
-./auto.sh  
-./configure  
-make
+## HOWTO
+    git clone https://github.com/chaoskao/sonic-pam-tacacs-dev.git  
+    cd pam_tacplus  
+    ./auto.sh  
+    ./configure  
+    make
 
 =========================================  
 need to check how to link
