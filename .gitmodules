@@ -1,0 +1,3 @@
+[submodule "pam_tacplus"]
+	path = pam_tacplus
+	url = https://github.com/jeroennijhof/pam_tacplus.git
