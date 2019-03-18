@@ -1,3 +1,8 @@
+## setup environment
+sudo apt-get install autoconf
+sudo apt-get install libtools
+
+
 ## download required library
 sudo apt-get install libpam0g-dev  
 sudo apt-get install libssl-dev
