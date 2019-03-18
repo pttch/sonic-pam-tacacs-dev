@@ -12,6 +12,9 @@ sudo apt-get install libssl-dev
 
 ## HOWTO
     git clone https://github.com/chaoskao/sonic-pam-tacacs-dev.git  
+    cd sonic-pam-tacacs-dev  
+    git submodule init  
+    git submodule update  
     cd pam_tacplus  
     ./auto.sh  
     ./configure  
