@@ -32,7 +32,11 @@ sonic-pam-tacacs-dev is a c project to develop pam_tacacs
 	./configure prefix=<local_dir>/build
     make
     make install
-
+	
+## RUN server
+    cp tac_plus.conf /tac_plus/build/sbin/
+    cd sonic-pam-tacacs-dev/tac_plus/build/sbin/
+    ./tac_plus -C tac_plus.conf -p 4900
 
 =========================================  
 need to check how to link
