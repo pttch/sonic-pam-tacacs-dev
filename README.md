@@ -2,7 +2,7 @@
 sonic-pam-tacacs-dev is a c project to develop pam_tacacs
 
 # TACACS+ client
-##download code & initial submodule
+## download code & initial submodule
     git clone https://github.com/chaoskao/sonic-pam-tacacs-dev.git  
     cd sonic-pam-tacacs-dev  
     git submodule init  
