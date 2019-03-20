@@ -12,20 +12,22 @@ sonic-pam-tacacs-dev is a c project to develop pam_tacacs
     sudo apt-get install libtools
 
 ## download required library
+    # for client
     sudo apt-get install libpam0g-dev  
     sudo apt-get install libssl-dev
-	
+	# for server
 	sudo apt-get install flex  
 	sudo apt-get install bison  
 	sudo apt-get install libwrap0-dev
 
-## HOWTO    
+## HOWTO
+    #for client
     cd sonic-pam-tacacs-dev/pam_tacplus  
     ./auto.sh  
     ./configure  
     make
 	make install
-
+    #for server
     cd sonic-pam-tacacs-dev/tac_plus/tacacs-F4.0.4.28
 	./configure prefix=<local_dir>/build
     make
