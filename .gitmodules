@@ -1,3 +1,6 @@
 [submodule "pam_tacplus"]
 	path = pam_tacplus
 	url = https://github.com/jeroennijhof/pam_tacplus.git
+[submodule "tac_plus"]
+	path = tac_plus
+	url = https://github.com/facebook/tac_plus.git
