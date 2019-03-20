@@ -9,12 +9,12 @@ sonic-pam-tacacs-dev is a c project to develop pam_tacacs
     git submodule update  
 
 ## setup environment
-sudo apt-get install autoconf  
-sudo apt-get install libtools
+    sudo apt-get install autoconf  
+    sudo apt-get install libtools
 
 ## download required library
-sudo apt-get install libpam0g-dev  
-sudo apt-get install libssl-dev
+    sudo apt-get install libpam0g-dev  
+    sudo apt-get install libssl-dev
 
 ## HOWTO    
     cd sonic-pam-tacacs-dev/pam_tacplus  
