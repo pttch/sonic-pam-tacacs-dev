@@ -28,8 +28,8 @@ sudo apt-get install libssl-dev
     git clone https://github.com/facebook/tac_plus.git
 
 ## download required library
-    sudo apt-get install flex
-	sudo apt-get install bison
+    sudo apt-get install flex  
+	sudo apt-get install bison  
 	sudo apt-get install libwrap0-dev
 	
 ## HOWTO
