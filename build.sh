@@ -7,7 +7,7 @@ echo $home
 cd pam_tacplus
 ./auto.sh
 ./configure --prefix=${home}/client
-make
+make 
 make install
 
 #build server
