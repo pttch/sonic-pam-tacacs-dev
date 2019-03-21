@@ -15,12 +15,23 @@ sonic-pam-tacacs-dev is a c project to develop pam_tacacs
     # for client
     sudo apt-get install libpam0g-dev  
     sudo apt-get install libssl-dev
+    sudo apt-get install libgtest-dev
+
+    cd /usr/src/gtest
+    sudo cmake CMakeLists.txt
+    sudo make
+
+    cd /usr/src/gmock
+    sudo cmake CMakeLists.txt
+    sudo make
+
     # for server
     sudo apt-get install flex  
     sudo apt-get install bison  
     sudo apt-get install libwrap0-dev
 
 ## HOWTO
+    cd /usr/src/gtest && sudo cmake . && sudo make
     ./build.sh    
 	
 ## RUN server
