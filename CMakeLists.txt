@@ -18,13 +18,6 @@ ADD_EXECUTABLE(pam_tacplus_test
 TARGET_LINK_LIBRARIES(pam_tacplus_test
     gmock gtest gtest_main pthread ${PAM_TACPLUS_DIR}/pam_tacplus.a tac pam crypto
 )
-target_include_directories(pam_tacplus_test PRIVATE /home/nms/sonic-pam-tacacs-dev/client/include)
-
-ADD_EXECUTABLE(pam_tacplus_socket_test
-    ${PAM_TACPLUS_TEST_DIR}/pam_tacplus_socket_test.cpp
-)
-TARGET_LINK_LIBRARIES(pam_tacplus_socket_test
-    gmock gtest gtest_main pthread ${PAM_TACPLUS_DIR}/pam_tacplus.a tac pam crypto
-)
+target_include_directories(pam_tacplus_test PRIVATE ${CMAKE_SOURCE_DIR}/client/include)
 
 include(CTest)
