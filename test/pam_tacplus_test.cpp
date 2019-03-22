@@ -65,8 +65,8 @@ namespace PamTacPlusTest
 
     TEST_F(PamTacPlusTest, authenticate_Test)
     {
-        const char *SERVER = "192.168.137.70";
-        const char *KEY = "accton";
+        const char *SERVER = "127.0.0.1";
+        const char *KEY = "testing123";
         const int SERVER_TIMEOUT = 10;
         int tac_fd;
         int ret;
@@ -76,10 +76,10 @@ namespace PamTacPlusTest
         hints.ai_family = AF_UNSPEC;
         hints.ai_socktype = SOCK_STREAM;
 
-        ret = getaddrinfo(SERVER, "tacacs", &hints, &tac_server);
+        ret = getaddrinfo(SERVER, "4900", &hints, &tac_server);
         ASSERT_EQ(0, ret);
 
-        authenticate(tac_server, KEY, "kevin", "hello", "tty", "192.168.137.160");
+        authenticate(tac_server, KEY, "testguy", "abcd1234", "tty", "1.1.1.1");
     }
 
     TEST_F(PamTacPlusTest, tac_connect_single_Test)
