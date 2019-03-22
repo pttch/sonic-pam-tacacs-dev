@@ -53,15 +53,13 @@ namespace PamTacPlusTest
         void SetUp()
         {
             chdir("../server/sbin/");
-            char cwd[PATH_MAX];
+            char cwd[PATH_MAX] = {0};
             getcwd(cwd, sizeof(cwd));
-            char cmd[PATH_MAX] = "";            
+            char cmd[PATH_MAX] = {0};            
             strcpy(cmd, cwd);
             strcat(cmd, "/tac_plus -C ");
-            char arg[PATH_MAX] = "";
-            strcpy(arg, cwd);
-            strcat(arg, "/tac_plus.conf -p 4900");            
-            strcat(cmd, arg);            
+            strcat(cmd, cwd);
+            strcat(cmd, "/tac_plus.conf -p 4900");
             
             system(cmd);
             sleep(5);
@@ -69,7 +67,7 @@ namespace PamTacPlusTest
 
         void TearDown()
         {
-             system("killall tac_plus");   
+            system("killall tac_plus");   
         }
     };
 
