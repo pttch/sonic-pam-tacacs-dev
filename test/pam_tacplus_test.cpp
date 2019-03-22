@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "gmock/gmock.h"
+#include <unistd.h>
 
 extern "C"
 {
@@ -51,17 +52,26 @@ namespace PamTacPlusTest
 
         void SetUp()
         {
+            chdir("../server/sbin/");
+            char cwd[PATH_MAX];
+            getcwd(cwd, sizeof(cwd));
+            char cmd[PATH_MAX] = "";            
+            strcpy(cmd, cwd);
+            strcat(cmd, "/tac_plus -C ");
+            char arg[PATH_MAX] = "";
+            strcpy(arg, cwd);
+            strcat(arg, "/tac_plus.conf -p 4900");            
+            strcat(cmd, arg);            
+            
+            system(cmd);
+            sleep(5);
         }
 
         void TearDown()
         {
+             system("killall tac_plus");   
         }
     };
-
-    TEST_F(PamTacPlusTest, pam_sm_authenticate_Test)
-    {
-        pam_sm_authenticate(NULL, 0, 0, NULL);
-    }
 
     TEST_F(PamTacPlusTest, authenticate_Test)
     {
@@ -80,11 +90,6 @@ namespace PamTacPlusTest
         ASSERT_EQ(0, ret);
 
         authenticate(tac_server, KEY, "testguy", "abcd1234", "tty", "1.1.1.1");
-    }
-
-    TEST_F(PamTacPlusTest, tac_connect_single_Test)
-    {
-
     }
 }
 
