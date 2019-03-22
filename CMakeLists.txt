@@ -1,16 +1,17 @@
-PROJECT(tests)
+PROJECT(test)
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.5 FATAL_ERROR)
 
 set(PAM_TACPLUS_TEST_DIR ${CMAKE_SOURCE_DIR}/test/)
-set(PAM_TACPLUS_DIR ${CMAKE_SOURCE_DIR}/pam_tacplus)
+set(PAM_TACPLUS_DIR ${CMAKE_SOURCE_DIR}/client)
+set(PAM_LIBTAC_DIR ${CMAKE_SOURCE_DIR}/client/include)
+set(PAM_TACPLUS_LIB ${CMAKE_SOURCE_DIR}/client/lib/security)
 set(CMAKE_CXX_FLAGS "-fpermissive")
 
 set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 INCLUDE_DIRECTORIES(
-    ${PAM_LIBTAC_INCLUDE_DIR}
-    ${PAM_LIBTAC_SOURCE_DIR}
+    ${PAM_LIBTAC_DIR}
 )
 
 include(${CMAKE_ROOT}/Modules/ExternalProject.cmake)
@@ -21,8 +22,10 @@ ADD_EXECUTABLE(pam_tacplus_test
     ${PAM_TACPLUS_TEST_DIR}/pam_tacplus_test.cpp
 )
 TARGET_LINK_LIBRARIES(pam_tacplus_test
-    gmock gtest gtest_main pthread pam_tacplus tac pam crypto
+    gmock gtest gtest_main pthread ${CMAKE_SOURCE_DIR}/client/lib/security/pam_tacplus.so ${CMAKE_SOURCE_DIR}/client/lib/libtac.so pam crypto
 )
-target_include_directories(pam_tacplus_test PRIVATE ${CMAKE_SOURCE_DIR}/client/include)
+target_link_directories(pam_tacplus_test PRIVATE ${CMAKE_SOURCE_DIR}/client/lib)
+
+target_link_directories(pam_tacplus_test PRIVATE ${CMAKE_SOURCE_DIR}/client/lib/security)
 
 include(CTest)
