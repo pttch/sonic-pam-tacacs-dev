@@ -15,7 +15,8 @@ sonic-pam-tacacs-dev is a c project to develop pam_tacacs
     # for client
     sudo apt-get install libpam0g-dev  
     sudo apt-get install libssl-dev
-    sudo apt-get install libgtest-dev
+    sudo apt-get install libgtest-dev  
+    sudo apt-get install google-mock
 
     cd /usr/src/gtest
     sudo cmake CMakeLists.txt
