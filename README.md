@@ -19,12 +19,14 @@ sonic-pam-tacacs-dev is a c project to develop pam_tacacs
     sudo apt-get install google-mock
 
     cd /usr/src/gtest
-    sudo cmake CMakeLists.txt
-    sudo make
+    sudo cmake CMakeLists.txt  
+    sudo make  
+    sudo cp *.a /usr/lib/
 
     cd /usr/src/gmock
-    sudo cmake CMakeLists.txt
-    sudo make
+    sudo cmake CMakeLists.txt  
+    sudo make  
+    sudo cp *.a /usr/lib/
 
     # for server
     sudo apt-get install flex  
