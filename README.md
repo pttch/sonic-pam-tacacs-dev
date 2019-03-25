@@ -35,7 +35,11 @@ sonic-pam-tacacs-dev is a c project to develop pam_tacacs
     sudo apt-get install libwrap0-dev
 
 ## HOWTO
-    ./build.sh    
+    cd sonic-pam-tacacs-dev  
+    ./build.sh  
+	mkdir build  
+	cd build  
+	cmake ../
 	
 ## RUN server
     cd sonic-pam-tacacs-dev/server/sbin/
