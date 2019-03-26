@@ -18,6 +18,9 @@ include(${CMAKE_ROOT}/Modules/ExternalProject.cmake)
 
 find_package(Gtest REQUIRED)
 
+file(WRITE "${PAM_TACPLUS_TEST_DIR}/config.h" "#define SERVER_BIN_PATH \"${SERVER_BIN_PATH}\"\n")
+file(APPEND "${PAM_TACPLUS_TEST_DIR}/config.h" "#define SERVER_PORT \"${SERVER_PORT}\"")
+
 ADD_EXECUTABLE(pam_tacplus_test
     ${PAM_TACPLUS_TEST_DIR}/pam_tacplus_test.cpp
 )

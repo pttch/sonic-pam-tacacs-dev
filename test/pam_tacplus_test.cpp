@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include "gmock/gmock.h"
 #include <unistd.h>
+#include "config.h"
+#include <iostream>
+#include <sstream>
 
 extern "C"
 {
@@ -10,11 +13,7 @@ extern "C"
 
     #include <security/pam_modules.h>
 
-    #include "libtac/libtac.h"
-
-    extern void authenticate(const struct addrinfo *tac_server, const char *tac_secret,
-                const char *user, const char *pass, const char *tty,
-                const char *remote_addr);
+    #include "libtac/libtac.h"   
 }
 
 namespace PamTacPlusTest
@@ -52,16 +51,10 @@ namespace PamTacPlusTest
 
         void SetUp()
         {
-            chdir("../server/sbin/");
-            char cwd[PATH_MAX] = {0};
-            getcwd(cwd, sizeof(cwd));
-            char cmd[PATH_MAX] = {0};            
-            strcpy(cmd, cwd);
-            strcat(cmd, "/tac_plus -C ");
-            strcat(cmd, cwd);
-            strcat(cmd, "/tac_plus.conf -p 4900");
+            std::stringstream path;
+            path << SERVER_BIN_PATH << "/tac_plus -C " << SERVER_BIN_PATH << "/tac_plus.conf -p " << SERVER_PORT;
             
-            system(cmd);
+            system(path.str().c_str());
             sleep(5);
         }
 
@@ -75,79 +68,35 @@ namespace PamTacPlusTest
     {
         const char *SERVER = "127.0.0.1";
         const char *KEY = "testing123";
+		const char *user = "testguy";
+        const char *pass = "abcd1234";
+        const char *tty = "ppp";
+        const char *remote_addr = "1.1.1.1";
         const int SERVER_TIMEOUT = 10;
         int tac_fd;
         int ret;
+        struct areply arep;
         struct addrinfo *tac_server;
         struct addrinfo hints;
         memset(&hints, 0, sizeof hints);
         hints.ai_family = AF_UNSPEC;
         hints.ai_socktype = SOCK_STREAM;
+        
 
-        ret = getaddrinfo(SERVER, "4900", &hints, &tac_server);
+        ret = getaddrinfo(SERVER, SERVER_PORT, &hints, &tac_server);
         ASSERT_EQ(0, ret);
 
-        authenticate(tac_server, KEY, "testguy", "abcd1234", "tty", "1.1.1.1");
-    }
-}
+        tac_fd = tac_connect_single(tac_server, KEY, NULL, 60);
+        ASSERT_EQ(0, ret);
 
-extern "C"
-{
-    /* from tacc.c in pam_tacplus project
-     */
-#define    EXIT_OK        0
-#define    EXIT_FAIL    1    /* AAA failure (or server error) */
-#define    EXIT_ERR    2    /* local error */
+        /* start authentication */
 
-int quiet = 0;
-
-void authenticate(const struct addrinfo *tac_server, const char *tac_secret,
-                  const char *user, const char *pass, const char *tty,
-                  const char *remote_addr) {
-    int tac_fd;
-    int ret;
-    struct areply arep;
-
-    tac_fd = tac_connect_single(tac_server, tac_secret, NULL, 60);
-    if (tac_fd < 0) {
-        if (!quiet)
-            printf("Error connecting to TACACS+ server: %m\n");
-        exit(EXIT_ERR);
-    }
-
-    /* start authentication */
-
-    if (tac_authen_send(tac_fd, user, pass, tty, remote_addr,
-                        TAC_PLUS_AUTHEN_LOGIN) < 0) {
-        if (!quiet)
-            printf("Error sending query to TACACS+ server\n");
-        exit(EXIT_ERR);
-    }
-
-    ret = tac_authen_read(tac_fd, &arep);
-
-    if (ret == TAC_PLUS_AUTHEN_STATUS_GETPASS) {
-
-        if (tac_cont_send(tac_fd, pass) < 0) {
-            if (!quiet)
-                printf("Error sending query to TACACS+ server\n");
-            exit(EXIT_ERR);
-        }
+        ret = tac_authen_send(tac_fd, user, pass, tty, remote_addr, TAC_PLUS_AUTHEN_LOGIN);
+        ASSERT_EQ(0, ret);
 
         ret = tac_authen_read(tac_fd, &arep);
+        ASSERT_EQ(TAC_PLUS_AUTHEN_STATUS_PASS, ret);
+
+        close(tac_fd);
     }
-
-    if (ret != TAC_PLUS_AUTHEN_STATUS_PASS) {
-        if (!quiet)
-            printf("Authentication FAILED: %s\n", arep.msg);
-        syslog(LOG_ERR, "authentication failed for %s: %s", user, arep.msg);
-        exit(EXIT_FAIL);
-    }
-
-    if (!quiet)
-        printf("Authentication OK\n");
-    syslog(LOG_INFO, "authentication OK for %s", user);
-
-    close(tac_fd);
-}
 }
