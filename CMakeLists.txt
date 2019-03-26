@@ -27,8 +27,5 @@ ADD_EXECUTABLE(pam_tacplus_test
 TARGET_LINK_LIBRARIES(pam_tacplus_test
     gmock gtest gtest_main pthread ${CMAKE_SOURCE_DIR}/client/lib/security/pam_tacplus.so ${CMAKE_SOURCE_DIR}/client/lib/libtac.so pam crypto
 )
-target_link_directories(pam_tacplus_test PRIVATE ${CMAKE_SOURCE_DIR}/client/lib)
-
-target_link_directories(pam_tacplus_test PRIVATE ${CMAKE_SOURCE_DIR}/client/lib/security)
 
 include(CTest)
