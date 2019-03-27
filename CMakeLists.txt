@@ -24,10 +24,17 @@ configure_file (
     ${PROJECT_BINARY_DIR}/config.h
 )
 
-ADD_EXECUTABLE(pam_tacplus_test
-    ${PAM_TACPLUS_TEST_DIR}/pam_tacplus_test.cpp
+ADD_EXECUTABLE(pam_tacplus_integration_test
+    ${PAM_TACPLUS_TEST_DIR}/pam_tacplus_integration_test.cpp
 )
-TARGET_LINK_LIBRARIES(pam_tacplus_test
+TARGET_LINK_LIBRARIES(pam_tacplus_integration_test
+    gmock gtest gtest_main pthread ${CMAKE_SOURCE_DIR}/client/lib/security/pam_tacplus.so ${CMAKE_SOURCE_DIR}/client/lib/libtac.so pam crypto
+)
+
+ADD_EXECUTABLE(pam_tacplus_unit_test
+    ${PAM_TACPLUS_TEST_DIR}/pam_tacplus_unit_test.cpp
+)
+TARGET_LINK_LIBRARIES(pam_tacplus_unit_test
     gmock gtest gtest_main pthread ${CMAKE_SOURCE_DIR}/client/lib/security/pam_tacplus.so ${CMAKE_SOURCE_DIR}/client/lib/libtac.so pam crypto
 )
 
