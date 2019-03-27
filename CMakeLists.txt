@@ -12,14 +12,17 @@ set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" "${CMAKE_CURRENT_SOURCE_DIR}/cmake"
 
 INCLUDE_DIRECTORIES(
     ${PAM_LIBTAC_DIR}
+    ${PROJECT_BINARY_DIR}
 )
 
 include(${CMAKE_ROOT}/Modules/ExternalProject.cmake)
 
 find_package(Gtest REQUIRED)
 
-file(WRITE "${PAM_TACPLUS_TEST_DIR}/config.h" "#define SERVER_BIN_PATH \"${SERVER_BIN_PATH}\"\n")
-file(APPEND "${PAM_TACPLUS_TEST_DIR}/config.h" "#define SERVER_PORT \"${SERVER_PORT}\"")
+configure_file (
+    test/config.h.in
+    ${PROJECT_BINARY_DIR}/config.h
+)
 
 ADD_EXECUTABLE(pam_tacplus_test
     ${PAM_TACPLUS_TEST_DIR}/pam_tacplus_test.cpp
