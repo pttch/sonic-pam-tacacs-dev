@@ -2,7 +2,7 @@ PROJECT(test)
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.5 FATAL_ERROR)
 
-set(PAM_TACPLUS_TEST_DIR ${CMAKE_SOURCE_DIR}/test/)
+set(PAM_TACPLUS_TEST_DIR ${CMAKE_SOURCE_DIR}/tests/)
 set(PAM_TACPLUS_DIR ${CMAKE_SOURCE_DIR}/client)
 set(PAM_LIBTAC_DIR ${CMAKE_SOURCE_DIR}/client/include)
 set(PAM_TACPLUS_LIB ${CMAKE_SOURCE_DIR}/client/lib/security)
@@ -20,7 +20,7 @@ include(${CMAKE_ROOT}/Modules/ExternalProject.cmake)
 find_package(Gtest REQUIRED)
 
 configure_file (
-    test/config.h.in
+    tests/config.h.in
     ${PROJECT_BINARY_DIR}/config.h
 )
 
