@@ -32,4 +32,5 @@ sonic-pam-tacacs-dev is a c project to develop pam_tacacs
     ./build.sh  
     mkdir build 
     cd build  
-    cmake ../ -DSERVER_BIN_PATH=`pwd`/../server/sbin/ -DSERVER_PORT=4900
+    cmake ../ -DSERVER_BIN_PATH=`pwd`/../server/sbin/ -DSERVER_PORT=4900  
+    make
