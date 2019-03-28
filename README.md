@@ -1,6 +1,9 @@
 ## Introduction
 sonic-pam-tacacs-dev is a c project to develop pam_tacacs
 
+## OS limit
+please run on ubuntu 18.04 or higher, this develop environment need g++7
+
 ## download code & initial submodule
     git clone https://github.com/chaoskao/sonic-pam-tacacs-dev.git  
     cd sonic-pam-tacacs-dev  
@@ -8,21 +11,14 @@ sonic-pam-tacacs-dev is a c project to develop pam_tacacs
     git submodule update  
 
 ## setup environment
-    sudo apt-get install -y autoconf libtool cmake 
+    sudo apt-get install -y autoconf libtool cmake make psmisc  
 
 ## download required library
     # for client
-    sudo apt-get install -y libpam0g-dev libssl-dev libgtest-dev google-mock
+    sudo apt-get install -y libpam0g-dev libssl-dev libgtest-dev  
 
-    cd /usr/src/gtest
-    sudo cmake .  
-    sudo make  
-    sudo cp *.a /usr/lib/
-
-    cd /usr/src/gmock
-    sudo cmake .  
-    sudo make  
-    sudo cp *.a /usr/lib/
+    mkdir -p /tmp/gtest && cd /tmp/gtest  
+    sudo cmake /usr/src/googletest && sudo make && sudo make install  
 
     # for server
     sudo apt-get install -y flex bison libwrap0-dev
