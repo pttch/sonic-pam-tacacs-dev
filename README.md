@@ -11,13 +11,12 @@ please run on ubuntu 18.04 or higher, this develop environment need g++7
     git submodule update  
 
 ## setup environment
-    sudo apt-get install -y autoconf libtool cmake make psmisc  
+    sudo apt-get install -y autoconf libtool cmake make psmisc build-essential  
 
 ## download required library
     # for client
     sudo apt-get install -y libpam0g-dev libssl-dev libgtest-dev  
 
-    mkdir -p /tmp/gtest && cd /tmp/gtest  
     sudo cmake /usr/src/googletest && sudo make && sudo make install  
 
     # for server
