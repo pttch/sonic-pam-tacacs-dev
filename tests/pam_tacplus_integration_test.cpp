@@ -87,7 +87,7 @@ namespace PamTacPlusTest
         ASSERT_EQ(0, ret);
 
         tac_fd = tac_connect_single(tac_server, KEY, NULL, 60);
-        ASSERT_EQ(0, ret);
+        ASSERT_TRUE(0 < tac_fd);
 
         /* start authentication */
 
