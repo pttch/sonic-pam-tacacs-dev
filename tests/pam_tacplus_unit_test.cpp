@@ -35,6 +35,7 @@ namespace PamTacPlusServerMockTest
     public:
         MOCK_METHOD3(getpeername, int(int sockfd, struct sockaddr *addr, socklen_t *addrlen));
         MOCK_METHOD3(bind, int(int sockfd, const struct sockaddr *addr, socklen_t addrlen));
+        MOCK_METHOD5(select, int(int sockfd, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout));
         MOCK_METHOD3(connect, int(int sockfd, const struct sockaddr *addr, socklen_t addrlen));
         MOCK_METHOD3(write, ssize_t(int fd, const void *buf, size_t count));
         MOCK_METHOD3(read, ssize_t(int fd, void *buf, size_t count));
@@ -156,6 +157,8 @@ namespace PamTacPlusServerMockTest
             .WillRepeatedly(Return(0));
         EXPECT_CALL(core_layer_mock, connect(_, _, _))
             .WillRepeatedly(Return(0));
+        EXPECT_CALL(core_layer_mock, select(_, _, _,_,_))
+            .WillRepeatedly(Return(1));
         EXPECT_CALL(core_layer_mock, write(_, _, _))
             .WillRepeatedly(
                 DoAll(
@@ -190,6 +193,10 @@ extern "C"
                     socklen_t addrlen)
     {
         return PamTacPlusServerMockTest::g_core_layer_p->bind(sockfd, addr, addrlen);
+    }
+    int select(int sockfd, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout)
+    {
+        return PamTacPlusServerMockTest::g_core_layer_p->select(sockfd, readfds, writefds, exceptfds, timeout);
     }
 
     int connect(int sockfd, const struct sockaddr *addr,
