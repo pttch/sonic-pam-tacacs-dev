@@ -34,3 +34,4 @@ script:
   - make 
   - ~/sonic-pam-tacacs-dev/build/pam_tacplus_integration_test
   - ~/sonic-pam-tacacs-dev/build/pam_tacplus_unit_test  
+  - lsb_release -a
