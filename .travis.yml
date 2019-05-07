@@ -8,8 +8,10 @@ before_install:
   - sudo apt-get install -y autoconf libtool cmake make psmisc build-essential
   - sudo apt-get install -y libpam0g-dev libssl-dev libgtest-dev  
   - sudo apt-get install googletest  
-  - sudo cmake /usr/src/googletest && sudo make && sudo make install  
   - sudo apt-get install -y flex bison libwrap0-dev
+  - mkdir -p /tmp/gtest && cd /tmp/gtest
+  - git clone https://github.com/google/googletest.git
+  - cd googletest && cmake . && make && sudo make install
 
 script: 
   - cd sonic-pam-tacacs-dev  
