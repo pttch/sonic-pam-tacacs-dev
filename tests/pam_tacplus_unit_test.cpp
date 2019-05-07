@@ -20,8 +20,6 @@ extern "C"
 
 namespace PamTacPlusServerMockTest
 {
-    using namespace std;
-    using namespace std::tr1;
     using namespace testing;
     using ::testing::_;
 

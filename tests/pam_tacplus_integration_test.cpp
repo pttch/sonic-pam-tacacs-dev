@@ -18,8 +18,6 @@ extern "C"
 
 namespace PamTacPlusTest
 {
-    using namespace std;
-    using namespace std::tr1;
     using namespace testing;
     using ::testing::_;
 
