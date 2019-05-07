@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/pttch/sonic-pam-tacacs-dev.svg?branch=master)]
+
 ## Introduction
 sonic-pam-tacacs-dev is a c project to develop pam_tacacs
 
