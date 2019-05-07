@@ -6,7 +6,7 @@ set(PAM_TACPLUS_TEST_DIR ${CMAKE_SOURCE_DIR}/tests/)
 set(PAM_TACPLUS_DIR ${CMAKE_SOURCE_DIR}/client)
 set(PAM_LIBTAC_DIR ${CMAKE_SOURCE_DIR}/client/include)
 set(PAM_TACPLUS_LIB ${CMAKE_SOURCE_DIR}/client/lib/security)
-set(CMAKE_CXX_FLAGS "-fpermissive")
+
 
 set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
