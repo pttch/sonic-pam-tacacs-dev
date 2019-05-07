@@ -9,6 +9,7 @@ script:
   - mkdir -p /tmp/gtest && cd /tmp/gtest
   - git clone https://github.com/google/googletest.git
   - cd googletest && cmake . && make && sudo make install
+  - cd ~ 
   - ls  
   - git clone https://github.com/pttch/sonic-pam-tacacs-dev.git  
   - cd sonic-pam-tacacs-dev  
